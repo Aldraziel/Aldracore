@@ -29,3 +29,7 @@ buildNumber.properties
 .flattened-pom.xml
 
 build.xml
+
+.gradle/
+build/
+!gradle-wrapper.jar

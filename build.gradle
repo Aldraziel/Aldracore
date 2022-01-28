@@ -1,81 +1,81 @@
 plugins {
-    id 'java'
-    id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-group = 'fr.aldraziel'
-version = '1.0'
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+    group = 'fr.aldraziel'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
     }
-}
 
-compileJava {
-    targetCompatibility = sourceCompatibility = JavaVersion.VERSION_17
-    options.encoding = 'UTF-8'
-}
+    compileJava {
+        targetCompatibility = sourceCompatibility = JavaVersion.VERSION_17
+        options.encoding = 'UTF-8'
+    }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        }
+        maven {
+            url = 'https://oss.sonatype.org/content/groups/public/'
+        }
+    }
+
+    dependencies {
+        api 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+        api 'org.jetbrains:annotations:23.0.0'
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar) {
+        classifier 'javadoc'
+        from javadoc
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+
+    artifacts {
+        archives sourcesJar, javadocJar
+    }
+
+    publishing {
+        repositories {
+            maven {
+                credentials {
+                    username System.getenv('GITHUB_USERNAME')
+                    password System.getenv('GITHUB_TOKEN')
+                }
+                name = "Aldracore"
+                url = "https://maven.pkg.github.com/Aldraziel/Aldracore"
+            }
         }
     }
 }
+version = '1.0'
+archivesBaseName = 'Aldracore'
 
-repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://github.com/deanveloper/SkullCreator/raw/mvn-repo')
-    }
-
-    maven {
-        url = uri('https://repo.aikar.co/content/groups/aikar/')
-    }
-
-    maven {
-        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
-    }
-
-    maven {
-        url = uri('https://maven.enginehub.org/repo/')
-    }
-
-    maven {
-        url = uri('https://repo.extendedclip.com/content/repositories/placeholderapi/')
-    }
-
-    maven {
-        url = uri('https://repo.codemc.io/repository/maven-public/')
-    }
-
-    maven {
-        url = uri('https://jitpack.io')
-    }
-
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
+shadowJar {
+    configurations = [project.configurations.shadow]
 }
 
 dependencies {
-    implementation 'dev.dbassett:skullcreator:3.0.0'
-    implementation 'co.aikar:acf-paper:0.5.0-SNAPSHOT'
-    implementation 'com.github.Archy-X:SmartInvs:v1.2.8'
-    implementation 'de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT'
-    implementation 'com.github.Archy-X:XSeries:887fe61174'
-    implementation 'org.bstats:bstats-bukkit:1.7'
-    implementation 'org.jetbrains:annotations:16.0.1'
-    implementation 'com.udojava:EvalEx:2.6'
-    compileOnly 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
-    compileOnly 'me.clip:placeholderapi:2.10.6'
-    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.3'
-    compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.4-SNAPSHOT'
-    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
-    compileOnly 'com.github.dmulloy2:ProtocolLib:4.7.0'
-    compileOnly 'net.luckperms:api:5.2'
-    compileOnly 'com.github.TownyAdvanced:Towny:0.96.7.0'
-    compileOnly 'com.github.Slimefun:Slimefun4:RC-28'
+    shadow 'redis.clients:jedis:4.0.1'
+    shadow project(':API')
 }
