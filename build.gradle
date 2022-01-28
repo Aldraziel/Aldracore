@@ -17,65 +17,47 @@ compileJava {
     options.encoding = 'UTF-8'
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
-
 repositories {
     mavenLocal()
     maven {
         url = uri('https://github.com/deanveloper/SkullCreator/raw/mvn-repo')
-    }
-
-    maven {
         url = uri('https://repo.aikar.co/content/groups/aikar/')
-    }
-
-    maven {
-        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
-    }
-
-    maven {
         url = uri('https://maven.enginehub.org/repo/')
-    }
-
-    maven {
         url = uri('https://repo.extendedclip.com/content/repositories/placeholderapi/')
-    }
-
-    maven {
         url = uri('https://repo.codemc.io/repository/maven-public/')
-    }
-
-    maven {
         url = uri('https://jitpack.io')
+        url = uri('https://repo.maven.apache.org/maven2/')
+
     }
 
     maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
     }
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/repositories/public"
+    }
+
+
+    mavenCentral()
 }
 
 dependencies {
+    implementation 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+    implementation 'org.jetbrains:annotations:22.0.0'
     implementation 'dev.dbassett:skullcreator:3.0.0'
     implementation 'co.aikar:acf-paper:0.5.0-SNAPSHOT'
     implementation 'com.github.Archy-X:SmartInvs:v1.2.8'
     implementation 'de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT'
     implementation 'com.github.Archy-X:XSeries:887fe61174'
-    implementation 'org.bstats:bstats-bukkit:1.7'
-    implementation 'org.jetbrains:annotations:16.0.1'
-    implementation 'com.udojava:EvalEx:2.6'
-    compileOnly 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+    implementation 'org.bstats:bstats-bukkit:2.2.1'
+    implementation 'com.udojava:EvalEx:2.7'
+    implementation group: 'redis.clients', name: 'jedis', version: '4.1.0'
     compileOnly 'me.clip:placeholderapi:2.10.6'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.3'
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.4-SNAPSHOT'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
     compileOnly 'com.github.dmulloy2:ProtocolLib:4.7.0'
-    compileOnly 'net.luckperms:api:5.2'
+    compileOnly 'net.luckperms:api:5.3'
     compileOnly 'com.github.TownyAdvanced:Towny:0.96.7.0'
     compileOnly 'com.github.Slimefun:Slimefun4:RC-28'
 }
