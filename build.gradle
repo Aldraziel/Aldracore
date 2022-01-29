@@ -7,7 +7,7 @@ allprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
 
-    group = 'fr.aldraziel'
+    group 'fr.aldraziel'
 
     java {
         toolchain {
@@ -68,8 +68,7 @@ allprojects {
         }
     }
 }
-version = '1.0'
-archivesBaseName = 'Aldracore'
+version '1.0'
 
 shadowJar {
     configurations = [project.configurations.shadow]

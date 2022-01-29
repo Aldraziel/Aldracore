@@ -32,4 +32,5 @@ build.xml
 
 .gradle/
 build/
+API/build/
 !gradle-wrapper.jar
