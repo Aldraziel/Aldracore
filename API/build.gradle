@@ -1,5 +1,24 @@
-version '1.0'
+version '1.0.0'
 archivesBaseName = 'AldracoreAPI'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) { publication ->
+            from components.java
+            artifact tasks.sourcesJar
+            artifact tasks.javadocJar
+
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = 'aldracore-api'
+                name = project.name
+                description = 'API for the AldraCore'
+                url = 'https://github.com/Aldraziel/AldraCore'
+            }
+        }
+    }
+}
 
 dependencies {
 

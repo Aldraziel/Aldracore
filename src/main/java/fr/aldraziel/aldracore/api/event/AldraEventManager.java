@@ -1,7 +1,6 @@
 package fr.aldraziel.aldracore.api.event;
 
 import fr.aldraziel.aldracore.AldraCore;
-import org.bukkit.Bukkit;
 
 public class AldraEventManager implements IAldraEventManager {
 
@@ -13,6 +12,6 @@ public class AldraEventManager implements IAldraEventManager {
 
     @Override
     public void callEvent(AldraEvent event) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.core, task -> this.core.getServer().getPluginManager().callEvent(event));
+        this.core.getServer().getPluginManager().callEvent(event);
     }
 }

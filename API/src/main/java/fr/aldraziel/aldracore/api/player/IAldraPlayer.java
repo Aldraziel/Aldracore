@@ -39,10 +39,6 @@ public interface IAldraPlayer {
     double getTemerity();
     void setTemerity(double temerity);
 
-    /** Magic */
-    double getMagic();
-    void setMagic(double magic);
-
     /** Regeneration */
     double getRegen();
     void setRegen(double regen);
@@ -50,8 +46,4 @@ public interface IAldraPlayer {
     /** Bonus Wisdom */
     double getBonusWisdom();
     void setBonusWisdom(double bonusWisdom);
-
-    /** Mana */
-    double getMana();
-    void setMana(double mana);
 }

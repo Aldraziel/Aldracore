@@ -1,8 +1,6 @@
 package fr.aldraziel.aldracore.api.player;
 
 import fr.aldraziel.aldracore.AldraCore;
-import fr.aldraziel.aldracore.api.event.IAldraEventManager;
-import fr.aldraziel.aldracore.api.event.player.SavingPlayerEvent;
 import fr.aldraziel.aldracore.redis.RedisManager;
 import redis.clients.jedis.Jedis;
 
@@ -12,11 +10,9 @@ public class AldraPlayerManager implements IAldraPlayerManager {
 
     private final String key;
     private final RedisManager redis;
-    private final IAldraEventManager event;
 
     public AldraPlayerManager(AldraCore core) {
         this.redis = core.getRedis();
-        this.event = core.getApi().getEventManager();
         this.key = core.getConfig().getString("redis.key");
     }
 
@@ -31,7 +27,6 @@ public class AldraPlayerManager implements IAldraPlayerManager {
     public void savePlayer(IAldraPlayer player) {
         try (final Jedis jedis = this.redis.getJedis()){
             jedis.set(this.getKey(player.getUuid()), AldraCore.GSON.toJson(player));
-            this.event.callEvent(new SavingPlayerEvent(player));
         }
     }
 

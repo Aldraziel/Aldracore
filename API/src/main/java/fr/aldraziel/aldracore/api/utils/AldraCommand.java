@@ -2,7 +2,8 @@ package fr.aldraziel.aldracore.api.utils;
 
 public enum AldraCommand {
 
-    STATUS("status");
+    STATUS("status"),
+    UPGRADE("upgrade");
 
     private final String command;
 

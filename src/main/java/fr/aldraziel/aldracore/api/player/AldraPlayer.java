@@ -14,10 +14,8 @@ public class AldraPlayer implements IAldraPlayer {
     private double dodge;
     private double velocity;
     private double temerity;
-    private double magic;
     private double regen;
     private double bonusWisdom;
-    private double mana;
 
     public AldraPlayer(UUID uuid, String name) {
         this.uuid = uuid;
@@ -45,10 +43,8 @@ public class AldraPlayer implements IAldraPlayer {
         this.dodge = 0;
         this.velocity = 0;
         this.temerity = 0;
-        this.magic = 0;
         this.regen = 0;
         this.bonusWisdom = 0;
-        this.mana = 0;
     }
 
     @Override
@@ -122,16 +118,6 @@ public class AldraPlayer implements IAldraPlayer {
     }
 
     @Override
-    public double getMagic() {
-        return this.magic;
-    }
-
-    @Override
-    public void setMagic(double magic) {
-        this.magic = magic;
-    }
-
-    @Override
     public double getRegen() {
         return this.regen;
     }
@@ -149,15 +135,5 @@ public class AldraPlayer implements IAldraPlayer {
     @Override
     public void setBonusWisdom(double bonusWisdom) {
         this.bonusWisdom = bonusWisdom;
-    }
-
-    @Override
-    public double getMana() {
-        return this.mana;
-    }
-
-    @Override
-    public void setMana(double mana) {
-        this.mana = mana;
     }
 }

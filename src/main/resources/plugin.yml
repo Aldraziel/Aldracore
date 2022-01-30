@@ -1,5 +1,5 @@
 name: AldraCore
-version: 1.0
+version: 1.0.0
 main: fr.aldraziel.aldracore.AldraCore
 api-version: 1.18
 prefix: AldraCore
@@ -14,3 +14,6 @@ commands:
         usage: /status <Player>
         permission: aldracore.status
         description: View player status
+    upgrade:
+        usage: /upgrade
+        description: Upgrade item in your hand
