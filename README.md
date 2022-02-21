@@ -2,7 +2,7 @@
 
 ---
 
-- Need to implement Sagesse, Regeneration (REG), Velocity (VEL) and Sagesse (SAG) because idk what is this
+- Need to implement Sagesse, Regeneration (REG), and Sagesse (SAG) because idk what is this
 - Give Weapon and Armor level in lore, but waiting GUI for implementation
 
 ---
