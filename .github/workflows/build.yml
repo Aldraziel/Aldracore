@@ -22,3 +22,6 @@ jobs:
 
       - name: Build with Gradle
         run: gradle build
+        env:
+          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
