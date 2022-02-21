@@ -10,12 +10,10 @@ public class AldraPlayer implements IAldraPlayer {
     private double defense;
     private double critical;
     private double criticalDamage;
-    private double wisdom;
     private double dodge;
     private double velocity;
     private double temerity;
     private double regen;
-    private double bonusWisdom;
 
     public AldraPlayer(UUID uuid, String name) {
         this.uuid = uuid;
@@ -39,12 +37,10 @@ public class AldraPlayer implements IAldraPlayer {
         this.defense = 0;
         this.critical = 0;
         this.criticalDamage = 0;
-        this.wisdom = 0;
         this.dodge = 0;
         this.velocity = 0;
         this.temerity = 0;
         this.regen = 0;
-        this.bonusWisdom = 0;
     }
 
     @Override
@@ -75,16 +71,6 @@ public class AldraPlayer implements IAldraPlayer {
     @Override
     public void setCriticalDamage(double criticalDamage) {
         this.criticalDamage = criticalDamage;
-    }
-
-    @Override
-    public double getWisdom() {
-        return this.wisdom;
-    }
-
-    @Override
-    public void setWisdom(double wisdom) {
-        this.wisdom = wisdom;
     }
 
     @Override
@@ -125,15 +111,5 @@ public class AldraPlayer implements IAldraPlayer {
     @Override
     public void setRegen(double regen) {
         this.regen = regen;
-    }
-
-    @Override
-    public double getBonusWisdom() {
-        return this.bonusWisdom;
-    }
-
-    @Override
-    public void setBonusWisdom(double bonusWisdom) {
-        this.bonusWisdom = bonusWisdom;
     }
 }

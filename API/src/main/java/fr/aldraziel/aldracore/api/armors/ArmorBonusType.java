@@ -6,7 +6,7 @@ public enum ArmorBonusType implements IAldraBonusType {
 
     DEF,
     VEL,
-    SAG,
     TEM,
-    ESQ;
+    ESQ,
+    REGEN;
 }

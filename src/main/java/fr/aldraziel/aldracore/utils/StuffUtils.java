@@ -34,12 +34,11 @@ public class StuffUtils {
     }
 
     public static double getStatFromPlayerArmor(ItemStack item, ArmorBonusType bonus) {
-        double stat = 0;
         if (StuffUtils.isItemAnArmor(item)) {
             final AldraMaterial material = AldraMaterial.valueOf(item);
             final int level = NbtUtils.readNbt(item, AldraBonusItem.ARMOR.getNbt(), int.class);
-            stat = IAldraBonus.getHighestByType(AldraArmorBonus.class, material, bonus, level) / 100;
+            return IAldraBonus.getHighestByType(AldraArmorBonus.class, material, bonus, level) / 100;
         }
-        return stat;
+        return 0;
     }
 }

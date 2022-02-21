@@ -46,14 +46,12 @@ public class StatusCommand implements CommandExecutor {
         if (player != null) {
             sender.sendMessage(PREFIX + "---------- Status for " + player.getName() + ": ----------\n" +
                     "|  - " + ChatColor.GREEN + "Defense " + player.getDefense() + "%" + ChatColor.RESET + "\n" +
-                    "|  - " + ChatColor.BLUE + "Critical Chance " + player.getCritical() + "%" + ChatColor.RESET + "\n" +
+                    "|  - " + ChatColor.AQUA + "Critical Chance " + player.getCritical() + "%" + ChatColor.RESET + "\n" +
                     "|  - " + ChatColor.BLUE + "Critical Damage " + player.getCriticalDamage() + "%" + ChatColor.RESET + "\n" +
-                    "|  - " + ChatColor.WHITE + "Wisdom " + player.getWisdom() + "%" + ChatColor.RESET + "\n" +
                     "|  - " + ChatColor.GOLD + "Dodge " + player.getDodge() + "%" + ChatColor.RESET + "\n" +
                     "|  - " + ChatColor.GRAY + "Velocity " + player.getVelocity() + "%" + ChatColor.RESET + "\n" +
                     "|  - " + ChatColor.DARK_RED + "Temerity " + player.getTemerity() + "%" + ChatColor.RESET + "\n" +
-                    "|  - " + ChatColor.RED + "Regen " + player.getRegen() + "%" + ChatColor.RESET + "\n" +
-                    "|  - " + ChatColor.WHITE + "Bonus Wisdom " + player.getBonusWisdom() + "%" + ChatColor.RESET);
+                    "|  - " + ChatColor.RED + "Regen " + player.getRegen() + "%" + ChatColor.RESET);
         }
 
         return true;
@@ -63,9 +61,8 @@ public class StatusCommand implements CommandExecutor {
         final Player p = Bukkit.getPlayer(name);
         if (p != null) {
             return this.cache.getPlayer(p.getUniqueId());
-        } else {
-            sender.sendMessage(PREFIX + ChatColor.RED + "Cannot find a player with the name '" + name + "'");
-            return null;
         }
+        sender.sendMessage(PREFIX + ChatColor.RED + "Cannot find a player with the name '" + name + "'");
+        return null;
     }
 }

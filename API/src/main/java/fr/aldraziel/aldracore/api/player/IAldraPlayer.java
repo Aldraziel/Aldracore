@@ -2,6 +2,9 @@ package fr.aldraziel.aldracore.api.player;
 
 import java.util.UUID;
 
+/**
+ * All values are between 0 and 1.
+ */
 public interface IAldraPlayer {
 
     /** Base Player info */
@@ -23,10 +26,6 @@ public interface IAldraPlayer {
     double getCriticalDamage();
     void setCriticalDamage(double criticalDamage);
 
-    /** Wisdom */
-    double getWisdom();
-    void setWisdom(double wisdom);
-
     /** Dodge */
     double getDodge();
     void setDodge(double dodge);
@@ -42,8 +41,4 @@ public interface IAldraPlayer {
     /** Regeneration */
     double getRegen();
     void setRegen(double regen);
-
-    /** Bonus Wisdom */
-    double getBonusWisdom();
-    void setBonusWisdom(double bonusWisdom);
 }

@@ -4,6 +4,7 @@ import fr.aldraziel.aldracore.AldraCore;
 import fr.aldraziel.aldracore.api.event.IAldraEventManager;
 import fr.aldraziel.aldracore.api.event.player.PlayerStatsUpdateEvent;
 import fr.flowarg.aldraziel.aldraredis.RedisDataStorage;
+import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class AldraPlayerManager implements IAldraPlayerManager {
     @Override
     public void savePlayer(IAldraPlayer player) {
         this.redis.execute(jedis -> jedis.set(this.getKey(player.getUuid()), AldraCore.GSON.toJson(player)));
-        this.event.callEvent(new PlayerStatsUpdateEvent(player));
+        this.event.callEvent(new PlayerStatsUpdateEvent(player, Bukkit.getPlayer(player.getUuid())));
     }
 
     @Override

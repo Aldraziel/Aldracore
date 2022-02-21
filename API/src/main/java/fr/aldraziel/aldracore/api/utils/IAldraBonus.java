@@ -12,11 +12,10 @@ public interface IAldraBonus<A extends IAldraBonusType> {
         if (level > material.getMaxLevel(item)) level = material.getMaxLevel(item);
 
         for (T bonus : aldraBonus.getEnumConstants()) {
-            if (bonus.getMaterial() == material) {
-                if (bonus.getLevel() == level) {
-                    return bonus;
-                }
-            }
+            if (bonus.getMaterial() != material || bonus.getLevel() != level)
+                continue;
+
+            return bonus;
         }
         return null;
     }
@@ -29,13 +28,10 @@ public interface IAldraBonus<A extends IAldraBonusType> {
     static <Z extends IAldraBonusType, T extends IAldraBonus<Z>> double getHighestByType(Class<T> aldraBonus, AldraMaterial material, Z type, int level) {
         T max = null;
         for (T bonus : aldraBonus.getEnumConstants()) {
-            if (bonus.getMaterial() == material) {
-                if (bonus.getLevel() <= level) {
-                    if (bonus.getType() == type) {
-                        max = bonus;
-                    }
-                }
-            }
+            if (bonus.getMaterial() != material || bonus.getLevel() > level || bonus.getType() != type)
+                continue;
+
+            max = bonus;
         }
         return max != null ? max.getBonus() : 0;
     }

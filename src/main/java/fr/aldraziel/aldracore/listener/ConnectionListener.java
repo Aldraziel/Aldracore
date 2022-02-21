@@ -3,8 +3,8 @@ package fr.aldraziel.aldracore.listener;
 import fr.aldraziel.aldracore.AldraCore;
 import fr.aldraziel.aldracore.api.cache.IAldraCacheManager;
 import fr.aldraziel.aldracore.api.player.IAldraPlayerManager;
+import fr.aldraziel.aldracore.utils.PlayerUtils;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,15 +30,8 @@ public class ConnectionListener implements Listener {
             this.cache.updatePlayer(this.pm.createPlayer(player.getUniqueId(), player.getDisplayName()));
         }
 
-        final AttributeInstance attackSpeed = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
-        if (attackSpeed != null) {
-            attackSpeed.setBaseValue(24D);
-        }
-
-        final AttributeInstance moveSpeed = player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-        if (moveSpeed != null) {
-            moveSpeed.setBaseValue(moveSpeed.getBaseValue() + this.cache.getPlayer(player.getUniqueId()).getVelocity());
-        }
+        PlayerUtils.setAttribute(player, Attribute.GENERIC_ATTACK_SPEED, 24D);
+        PlayerUtils.setBonusAttribute(player, Attribute.GENERIC_MOVEMENT_SPEED, this.cache.getPlayer(player.getUniqueId()).getVelocity());
     }
 
     @EventHandler
