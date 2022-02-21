@@ -1,12 +1,12 @@
 package fr.aldraziel.aldracore.api.armors;
 
-public enum ArmorBonusType {
+import fr.aldraziel.aldracore.api.utils.IAldraBonusType;
+
+public enum ArmorBonusType implements IAldraBonusType {
 
     DEF,
     VEL,
     SAG,
     TEM,
     ESQ;
-
-    public static final String NBT_NAME = "AldraArmorLevel";
 }

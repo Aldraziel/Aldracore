@@ -25,6 +25,10 @@ public enum AldraMaterial {
         return this.maxArmorLevel;
     }
 
+    public int getMaxLevel(AldraBonusItem item) {
+        return item == AldraBonusItem.SWORD ? this.getMaxWeaponLevel() : this.getMaxArmorLevel();
+    }
+
     public static AldraMaterial valueOf(ItemStack stack) {
         return AldraMaterial.valueOf(stack.getType().name().split("_")[0]);
     }

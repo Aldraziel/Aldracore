@@ -4,7 +4,9 @@ import fr.aldraziel.aldracore.AldraCore;
 import fr.aldraziel.aldracore.api.armors.ArmorBonusType;
 import fr.aldraziel.aldracore.api.cache.IAldraCacheManager;
 import fr.aldraziel.aldracore.api.player.IAldraPlayer;
+import fr.aldraziel.aldracore.api.utils.AldraBonusItem;
 import fr.aldraziel.aldracore.api.utils.AldraMaterial;
+import fr.aldraziel.aldracore.api.utils.IAldraBonus;
 import fr.aldraziel.aldracore.api.weapons.AldraWeaponBonus;
 import fr.aldraziel.aldracore.api.weapons.WeaponBonusType;
 import fr.aldraziel.aldracore.utils.NbtUtils;
@@ -33,7 +35,7 @@ public class AttackListener implements Listener {
             //Damage item part
             final ItemStack damageItem = damager.getInventory().getItemInMainHand();
             final AldraMaterial damageMaterial = AldraMaterial.valueOf(damageItem);
-            final int damageLevel = NbtUtils.readNbt(damageItem, WeaponBonusType.NBT_NAME, int.class);
+            final int damageLevel = NbtUtils.readNbt(damageItem, AldraBonusItem.SWORD.getNbt(), int.class);
 
             //Final stats
             double damage = 0;
@@ -64,8 +66,8 @@ public class AttackListener implements Listener {
     }
 
     private double getCritical(IAldraPlayer player, double damage, AldraMaterial material, int level) {
-        final double cc = AldraWeaponBonus.getHighestByType(material, WeaponBonusType.CC, level) / 100;
-        final double dcc = AldraWeaponBonus.getHighestByType(material, WeaponBonusType.DCC, level) / 100;
+        final double cc = IAldraBonus.getHighestByType(AldraWeaponBonus.class, material, WeaponBonusType.CC, level) / 100;
+        final double dcc = IAldraBonus.getHighestByType(AldraWeaponBonus.class, material, WeaponBonusType.DCC, level) / 100;
 
         if ((Math.random()) <= (cc + player.getCritical())) {
             return (damage * (dcc + player.getCriticalDamage()));
@@ -74,7 +76,7 @@ public class AttackListener implements Listener {
     }
 
     private double getDamagedTypeBonus(Entity entity, double damage, AldraMaterial material, int level) {
-        final double typeBonus = AldraWeaponBonus.getHighestByType(material, (entity instanceof Player ? WeaponBonusType.DJ : WeaponBonusType.DM), level) / 100;
+        final double typeBonus = IAldraBonus.getHighestByType(AldraWeaponBonus.class, material, (entity instanceof Player ? WeaponBonusType.DJ : WeaponBonusType.DM), level) / 100;
         return (damage * typeBonus);
     }
 }

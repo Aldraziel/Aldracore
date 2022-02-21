@@ -1,8 +1,9 @@
 package fr.aldraziel.aldracore.api.weapons;
 
 import fr.aldraziel.aldracore.api.utils.AldraMaterial;
+import fr.aldraziel.aldracore.api.utils.IAldraBonus;
 
-public enum AldraWeaponBonus {
+public enum AldraWeaponBonus implements IAldraBonus<WeaponBonusType> {
 
     IRON_LEVEL_2(AldraMaterial.IRON, 2, WeaponBonusType.CC, 15, 12),
     IRON_LEVEL_3(AldraMaterial.IRON, 3, WeaponBonusType.CC, 25, 25),
@@ -44,55 +45,28 @@ public enum AldraWeaponBonus {
         this.xp = xp;
     }
 
+    @Override
     public AldraMaterial getMaterial() {
         return this.material;
     }
 
+    @Override
     public int getLevel() {
         return this.level;
     }
 
+    @Override
     public WeaponBonusType getType() {
         return this.type;
     }
 
+    @Override
     public int getBonus() {
         return this.bonus;
     }
 
+    @Override
     public int getXp() {
         return this.xp;
-    }
-
-    public static AldraWeaponBonus getByLevel(AldraMaterial material, int level) {
-        if (level > material.getMaxArmorLevel()) level = material.getMaxArmorLevel();
-
-        for (AldraWeaponBonus bonus : AldraWeaponBonus.values()) {
-            if (bonus.getMaterial() == material) {
-                if (bonus.getLevel() == level) {
-                    return bonus;
-                }
-            }
-        }
-        return null;
-    }
-
-    public static int getXpCost(AldraMaterial material, int level) {
-        final AldraWeaponBonus bonus = AldraWeaponBonus.getByLevel(material, level);
-        return bonus != null ? bonus.getXp() : 0;
-    }
-
-    public static double getHighestByType(AldraMaterial material, WeaponBonusType type, int level) {
-        AldraWeaponBonus max = null;
-        for (AldraWeaponBonus bonus : AldraWeaponBonus.values()) {
-            if (bonus.getMaterial() == material) {
-                if (bonus.getLevel() <= level) {
-                    if (bonus.getType() == type) {
-                        max = bonus;
-                    }
-                }
-            }
-        }
-        return max != null ? max.getBonus() : 0;
     }
 }

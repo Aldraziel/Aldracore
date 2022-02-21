@@ -1,11 +1,11 @@
 package fr.aldraziel.aldracore.api.weapons;
 
-public enum WeaponBonusType {
+import fr.aldraziel.aldracore.api.utils.IAldraBonusType;
+
+public enum WeaponBonusType implements IAldraBonusType {
 
     CC,
     DCC,
     DM,
     DJ;
-
-    public static final String NBT_NAME = "AldraWeaponLevel";
 }

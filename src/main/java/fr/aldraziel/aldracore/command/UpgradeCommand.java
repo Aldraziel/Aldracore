@@ -2,15 +2,14 @@ package fr.aldraziel.aldracore.command;
 
 import fr.aldraziel.aldracore.AldraCore;
 import fr.aldraziel.aldracore.api.armors.AldraArmorBonus;
-import fr.aldraziel.aldracore.api.armors.ArmorBonusType;
 import fr.aldraziel.aldracore.api.cache.IAldraCacheManager;
 import fr.aldraziel.aldracore.api.event.IAldraEventManager;
 import fr.aldraziel.aldracore.api.event.armor.UpgradeArmorEvent;
 import fr.aldraziel.aldracore.api.event.weapon.UpgradeWeaponEvent;
 import fr.aldraziel.aldracore.api.utils.AldraBonusItem;
 import fr.aldraziel.aldracore.api.utils.AldraMaterial;
+import fr.aldraziel.aldracore.api.utils.IAldraBonus;
 import fr.aldraziel.aldracore.api.weapons.AldraWeaponBonus;
-import fr.aldraziel.aldracore.api.weapons.WeaponBonusType;
 import fr.aldraziel.aldracore.utils.NbtUtils;
 import fr.aldraziel.aldracore.utils.StuffUtils;
 import org.bukkit.ChatColor;
@@ -40,8 +39,9 @@ public class UpgradeCommand implements CommandExecutor {
 
             if (StuffUtils.isItemASword(item)){
                 final AldraMaterial material = AldraMaterial.valueOf(item);
-                int level = this.getLevel(item, WeaponBonusType.NBT_NAME);
-                level = this.upgradeItem(player, item, WeaponBonusType.NBT_NAME, AldraBonusItem.SWORD, level, material.getMaxWeaponLevel(), AldraWeaponBonus.getXpCost(material, level));
+                int level = this.getLevel(item, AldraBonusItem.SWORD.getNbt());
+                level = this.upgradeItem(player, item, AldraBonusItem.SWORD.getNbt(), AldraBonusItem.SWORD, level, material.getMaxWeaponLevel(),
+                        IAldraBonus.getXpCost(AldraWeaponBonus.class, AldraBonusItem.SWORD, material, level));
 
                 if (level != 0) {
                     this.event.callEvent(new UpgradeWeaponEvent(this.cache.getPlayer(player.getUniqueId()), item, level));
@@ -51,8 +51,9 @@ public class UpgradeCommand implements CommandExecutor {
 
             if (StuffUtils.isItemAnArmor(item)) {
                 final AldraMaterial material = AldraMaterial.valueOf(item);
-                int level = this.getLevel(item, ArmorBonusType.NBT_NAME);
-                level = this.upgradeItem(player, item, ArmorBonusType.NBT_NAME, AldraBonusItem.ARMOR, level, material.getMaxWeaponLevel(), AldraArmorBonus.getXpCost(material, level));
+                int level = this.getLevel(item, AldraBonusItem.ARMOR.getNbt());
+                level = this.upgradeItem(player, item, AldraBonusItem.ARMOR.getNbt(), AldraBonusItem.ARMOR, level, material.getMaxArmorLevel(),
+                        IAldraBonus.getXpCost(AldraArmorBonus.class, AldraBonusItem.ARMOR, material, level));
 
                 if (level != 0) {
                     this.event.callEvent(new UpgradeArmorEvent(this.cache.getPlayer(player.getUniqueId()), item, level));
@@ -73,21 +74,20 @@ public class UpgradeCommand implements CommandExecutor {
     private int upgradeItem(Player player, ItemStack item, String nbtKey, AldraBonusItem bonus, int level, int maxLevel, int xpCost) {
         if (level == maxLevel) {
             player.sendMessage(PREFIX + ChatColor.RED + "Your" + bonus.name().toLowerCase() + "is already maxed !");
+            return 0;
+        }
+
+        final int xpLevel = player.getLevel();
+
+        if (xpLevel >= xpCost) {
+            player.setLevel(xpLevel - xpCost);
+            NbtUtils.writeNbt(item, nbtKey, level += 1);
+            player.sendMessage(PREFIX + "Your" + bonus.name().toLowerCase() + "has been " + ChatColor.AQUA + "upgraded" + ChatColor.RESET + " to level " + ChatColor.RED + level);
+            return level;
 
         } else {
-            final int xpLevel = player.getLevel();
-
-            if (xpLevel >= xpCost) {
-                player.setLevel(xpLevel - xpCost);
-                NbtUtils.writeNbt(item, nbtKey, level += 1);
-                player.sendMessage(PREFIX + "Your" + bonus.name().toLowerCase() + "has been " + ChatColor.AQUA + "upgraded" + ChatColor.RESET + " to level " + ChatColor.RED + level);
-                return level;
-
-            } else {
-                player.sendMessage(PREFIX + ChatColor.RED + "You dont have enough levels ! You need " + xpCost + " levels to upgrade your " + bonus.name().toLowerCase() + ".");
-                return 0;
-            }
+            player.sendMessage(PREFIX + ChatColor.RED + "You dont have enough levels ! You need " + xpCost + " levels to upgrade your " + bonus.name().toLowerCase() + ".");
+            return 0;
         }
-        return 0;
     }
 }

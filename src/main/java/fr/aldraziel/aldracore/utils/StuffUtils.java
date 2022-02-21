@@ -2,7 +2,9 @@ package fr.aldraziel.aldracore.utils;
 
 import fr.aldraziel.aldracore.api.armors.AldraArmorBonus;
 import fr.aldraziel.aldracore.api.armors.ArmorBonusType;
+import fr.aldraziel.aldracore.api.utils.AldraBonusItem;
 import fr.aldraziel.aldracore.api.utils.AldraMaterial;
+import fr.aldraziel.aldracore.api.utils.IAldraBonus;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -35,8 +37,8 @@ public class StuffUtils {
         double stat = 0;
         if (StuffUtils.isItemAnArmor(item)) {
             final AldraMaterial material = AldraMaterial.valueOf(item);
-            final int level = NbtUtils.readNbt(item, ArmorBonusType.NBT_NAME, int.class);
-            stat = AldraArmorBonus.getHighestByType(material, bonus, level) / 100;
+            final int level = NbtUtils.readNbt(item, AldraBonusItem.ARMOR.getNbt(), int.class);
+            stat = IAldraBonus.getHighestByType(AldraArmorBonus.class, material, bonus, level) / 100;
         }
         return stat;
     }
