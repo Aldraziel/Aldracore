@@ -2,10 +2,14 @@
 
 ---
 
+<<<<<<< HEAD
 - Need to implement Sagesse, Regeneration (REG), Velocity (VEL) and Sagesse (SAG) because idk what is this
 
 al reg et la sag c'est la même chose 😂 la régénération c'est le nombre de pv que tu recupe durant un lapse de temps quand ta saturation et au max
 
+=======
+- Need to implement Sagesse, Regeneration (REG), and Sagesse (SAG) because idk what is this
+>>>>>>> b74ef97be038e1f71a0b94ae64e9771f7988fdcc
 - Give Weapon and Armor level in lore, but waiting GUI for implementation
 
 ---
