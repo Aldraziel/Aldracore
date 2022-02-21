@@ -3,6 +3,8 @@ version: 1.0.0
 main: fr.aldraziel.aldracore.AldraCore
 api-version: 1.18
 prefix: AldraCore
+depend:
+    - AldraRedis
 
 permissions:
     aldracore.status:

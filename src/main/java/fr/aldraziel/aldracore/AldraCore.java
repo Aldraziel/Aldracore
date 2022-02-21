@@ -9,19 +9,19 @@ import fr.aldraziel.aldracore.command.StatusCommand;
 import fr.aldraziel.aldracore.command.UpgradeCommand;
 import fr.aldraziel.aldracore.listener.AttackListener;
 import fr.aldraziel.aldracore.listener.ConnectionListener;
-import fr.aldraziel.aldracore.redis.RedisManager;
+import fr.flowarg.aldraziel.aldraredis.AldraRedis;
+import fr.flowarg.aldraziel.aldraredis.RedisDataStorage;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//TODO Remove Totems of Undying
 public class AldraCore extends JavaPlugin {
 
     public static final Gson GSON = new GsonBuilder().serializeNulls().create();
 
     private AldraCoreAPI api;
-    private RedisManager redis;
+    private RedisDataStorage redis;
 
     @Override
     public void onEnable() {
@@ -29,34 +29,33 @@ public class AldraCore extends JavaPlugin {
         this.saveDefaultConfig();
 
         this.getLogger().info("Connecting to Redis...");
-        this.redis = new RedisManager(this);
+        this.redis = AldraRedis.getInstance().createNewRedisDataStorage();
 
         this.getLogger().info("Loading API...");
         this.api = new AldraCoreImpl(this);
 
         this.getLogger().info("Registering events...");
-        final PluginManager plManager = this.getServer().getPluginManager();
-        plManager.registerEvents(new AttackListener(this), this);
-        plManager.registerEvents(new ConnectionListener(this), this);
+        this.registerEvent(this.api.getCacheManager());
+        this.registerEvent(new AttackListener(this));
+        this.registerEvent(new ConnectionListener(this));
 
         this.getLogger().info("Registering commands...");
-
         this.setExecutor(AldraCommand.STATUS, new StatusCommand(this));
         this.setExecutor(AldraCommand.UPGRADE, new UpgradeCommand(this));
-    }
 
-    @Override
-    public void onDisable() {
-        this.redis.getPool().close();
-        this.redis.getPool().destroy();
+        this.api.getCacheManager().clearAndInit();
     }
 
     public AldraCoreAPI getApi() {
         return this.api;
     }
 
-    public RedisManager getRedis() {
+    public RedisDataStorage getRedis() {
         return this.redis;
+    }
+
+    private void registerEvent(Listener listener) {
+        this.getServer().getPluginManager().registerEvents(listener, this);
     }
 
     private void setExecutor(AldraCommand command, CommandExecutor executor) {

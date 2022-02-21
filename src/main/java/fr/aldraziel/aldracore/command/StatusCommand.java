@@ -1,8 +1,8 @@
 package fr.aldraziel.aldracore.command;
 
 import fr.aldraziel.aldracore.AldraCore;
+import fr.aldraziel.aldracore.api.cache.IAldraCacheManager;
 import fr.aldraziel.aldracore.api.player.IAldraPlayer;
-import fr.aldraziel.aldracore.api.player.IAldraPlayerManager;
 import fr.aldraziel.aldracore.api.utils.AldraPermission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,10 +16,10 @@ public class StatusCommand implements CommandExecutor {
 
     private static final String PREFIX = "[" + ChatColor.DARK_RED + "AldraCore" + ChatColor.RESET + "] ";
 
-    private final IAldraPlayerManager pm;
+    private final IAldraCacheManager cache;
 
     public StatusCommand(AldraCore core) {
-        this.pm = core.getApi().getPlayerManager();
+        this.cache = core.getApi().getCacheManager();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class StatusCommand implements CommandExecutor {
                 if (args.length == 1) {
                     player = this.getPlayerWithName(sender, args[0]);
                 } else {
-                    player = this.pm.getPlayer(bukkitPlayer.getUniqueId());
+                    player = this.cache.getPlayer(bukkitPlayer.getUniqueId());
                 }
             } else {
                 sender.sendMessage(PREFIX + ChatColor.RED + "You don't have the permission to execute this command !");
@@ -62,7 +62,7 @@ public class StatusCommand implements CommandExecutor {
     private IAldraPlayer getPlayerWithName(CommandSender sender, String name) {
         final Player p = Bukkit.getPlayer(name);
         if (p != null) {
-            return this.pm.getPlayer(p.getUniqueId());
+            return this.cache.getPlayer(p.getUniqueId());
         } else {
             sender.sendMessage(PREFIX + ChatColor.RED + "Cannot find a player with the name '" + name + "'");
             return null;

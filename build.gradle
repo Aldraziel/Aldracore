@@ -30,6 +30,14 @@ allprojects {
         maven {
             url = 'https://oss.sonatype.org/content/groups/public/'
         }
+        maven {
+            credentials {
+                username System.getenv('GITHUB_USERNAME')
+                password System.getenv('GITHUB_TOKEN')
+            }
+            name "AldraRedis_maven"
+            url "https://maven.pkg.github.com/Aldraziel/AldraRedis"
+        }
     }
 
     dependencies {
@@ -62,7 +70,7 @@ allprojects {
                     username System.getenv('GITHUB_USERNAME')
                     password System.getenv('GITHUB_TOKEN')
                 }
-                name = "Aldracore"
+                name = "Aldracore_maven"
                 url = "https://maven.pkg.github.com/Aldraziel/Aldracore"
             }
         }
@@ -82,7 +90,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'fr.flowarg.aldraziel:aldraredis:1.0.0-SNAPSHOT'
     shadow 'de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT'
-    shadow 'redis.clients:jedis:4.0.1'
+    shadow 'org.jetbrains:annotations:23.0.0'
     shadow project(':API')
 }

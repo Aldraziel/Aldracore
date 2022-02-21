@@ -1,38 +1,25 @@
-package fr.aldraziel.aldracore.api.event.weapon;
+package fr.aldraziel.aldracore.api.event.player;
 
 import fr.aldraziel.aldracore.api.event.AldraEvent;
 import fr.aldraziel.aldracore.api.player.IAldraPlayer;
-import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class CriticalDamageEvent extends AldraEvent {
+public class PlayerStatsUpdateEvent extends AldraEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();
 
-    private final IAldraPlayer damager;
-    private final Entity damaged;
-    private final double damage;
+    private final IAldraPlayer player;
     private boolean isCancelled;
 
-    public CriticalDamageEvent(IAldraPlayer damager, Entity damaged, double damage) {
-        this.damager = damager;
-        this.damaged = damaged;
-        this.damage = damage;
+    public PlayerStatsUpdateEvent(IAldraPlayer player) {
+        this.player = player;
 
         this.isCancelled = false;
     }
 
-    public IAldraPlayer getDamager() {
-        return this.damager;
-    }
-
-    public Entity getDamaged() {
-        return this.damaged;
-    }
-
-    public double getDamage() {
-        return this.damage;
+    public IAldraPlayer getPlayer() {
+        return this.player;
     }
 
     @Override
