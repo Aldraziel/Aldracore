@@ -51,17 +51,18 @@ public class AttackListener implements Listener {
                 }
             }
 
-            if (!damagesCancelled) {
-                damage = e.getDamage() + (e.getDamage() * StuffUtils.getStatFromPlayerArmor(damager.getInventory(), ArmorBonusType.TEM));
-
-                final double critical = this.getCritical(aldraDamager, damage, damageMaterial, damageLevel);
-                final double damagedTypeBonus = this.getDamagedTypeBonus(e.getEntity(), damage, damageMaterial, damageLevel);
-
-                e.setDamage((damage + (damage * critical) + (damage * damagedTypeBonus)) - (damage * defense));
-            } else {
+            if (damagesCancelled) {
                 e.setCancelled(true);
                 e.setDamage(0);
+                return;
             }
+
+            damage = e.getDamage() + (e.getDamage() * StuffUtils.getStatFromPlayerArmor(damager.getInventory(), ArmorBonusType.TEM));
+
+            final double critical = this.getCritical(aldraDamager, damage, damageMaterial, damageLevel);
+            final double damagedTypeBonus = this.getDamagedTypeBonus(e.getEntity(), damage, damageMaterial, damageLevel);
+
+            e.setDamage((damage + (damage * critical) + (damage * damagedTypeBonus)) - (damage * defense));
         }
     }
 

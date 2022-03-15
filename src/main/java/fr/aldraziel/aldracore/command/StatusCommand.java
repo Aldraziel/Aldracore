@@ -24,23 +24,25 @@ public class StatusCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        IAldraPlayer player = null;
+        IAldraPlayer player;
         if (sender instanceof Player bukkitPlayer) {
-            if (bukkitPlayer.hasPermission(AldraPermission.STATUS.getPermission())) {
-                if (args.length == 1) {
-                    player = this.getPlayerWithName(sender, args[0]);
-                } else {
-                    player = this.cache.getPlayer(bukkitPlayer.getUniqueId());
-                }
-            } else {
+            if (!bukkitPlayer.hasPermission(AldraPermission.STATUS.getPermission())) {
                 sender.sendMessage(PREFIX + ChatColor.RED + "You don't have the permission to execute this command !");
+                return true;
             }
-        } else {
+
             if (args.length == 1) {
                 player = this.getPlayerWithName(sender, args[0]);
             } else {
+                player = this.cache.getPlayer(bukkitPlayer.getUniqueId());
+            }
+
+        } else {
+            if (args.length != 1) {
                 sender.sendMessage(PREFIX + ChatColor.RED + "Missing args ! Required 1 with usage " + command.getUsage());
             }
+
+            player = this.getPlayerWithName(sender, args[0]);
         }
 
         if (player != null) {
