@@ -1,3 +1,4 @@
+
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
@@ -41,7 +42,7 @@ allprojects {
     }
 
     dependencies {
-        api 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+        api 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
         api 'org.jetbrains:annotations:23.0.0'
     }
 
