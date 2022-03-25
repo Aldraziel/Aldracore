@@ -26,7 +26,7 @@ public class AttackListener implements Listener {
         this.cache = core.getApi().getCacheManager();
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof final Player damager && StuffUtils.isItemASword(damager.getInventory().getItemInMainHand())) {
             final IAldraPlayer aldraDamager = this.cache.getPlayer(damager.getUniqueId());
