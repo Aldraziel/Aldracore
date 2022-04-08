@@ -1,11 +1,3 @@
-## TODO[![](pin.svg)](#todo)
-
----
-
-- Give Weapon and Armor level in lore, but waiting GUI for implementation
-
----
-
 ## How to use API[![](pin.svg)](#api)
 
 ---

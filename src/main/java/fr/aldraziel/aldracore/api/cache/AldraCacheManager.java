@@ -10,15 +10,16 @@ import org.bukkit.event.EventHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class AldraCacheManager implements IAldraCacheManager {
 
-    private final IAldraPlayerManager pm;
+    private final Supplier<IAldraPlayerManager> pm;
     private final HashMap<UUID, IAldraPlayer> players;
 
     public AldraCacheManager(AldraCore core) {
         this.players = new HashMap<>();
-        this.pm = core.getApi().getPlayerManager();
+        this.pm = () -> core.getApi().getPlayerManager();
     }
 
     @Override
@@ -26,13 +27,13 @@ public class AldraCacheManager implements IAldraCacheManager {
         this.players.clear();
         Bukkit.getOnlinePlayers().forEach(player -> {
             final UUID uuid = player.getUniqueId();
-            this.players.put(uuid, this.pm.getPlayer(uuid));
+            this.players.put(uuid, this.pm.get().getPlayer(uuid));
         });
     }
 
     @Override
     public void updatePlayer(UUID uuid) {
-        this.updatePlayer(this.pm.getPlayer(uuid));
+        this.updatePlayer(this.pm.get().getPlayer(uuid));
     }
 
     @Override
