@@ -30,6 +30,11 @@ public enum AldraMaterial {
     }
 
     public static AldraMaterial valueOf(ItemStack stack) {
-        return AldraMaterial.valueOf(stack.getType().name().split("_")[0]);
+        for (AldraMaterial material : values()) {
+            if (material.name().equalsIgnoreCase(stack.getType().name().split("_")[0])) {
+                return material;
+            }
+        }
+        return null;
     }
 }

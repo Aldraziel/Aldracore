@@ -38,6 +38,10 @@ public class AttackListener implements Listener {
             final AldraMaterial damageMaterial = AldraMaterial.valueOf(damageItem);
             final int damageLevel = NbtUtils.readNbt(damageItem, AldraBonusItem.SWORD.getNbt(), int.class);
 
+            if (damageMaterial == null) {
+                return;
+            }
+
             //Final stats
             double damage = 0;
             double defense = 0;

@@ -68,7 +68,7 @@ allprojects {
         repositories {
             maven {
                 credentials {
-                    username "Yggdrasil80"
+                    username System.getenv("USERNAME")
                     password System.getenv('TOKEN')
                 }
                 name = "Aldracore_maven"
@@ -78,7 +78,7 @@ allprojects {
     }
 }
 
-version '1.0.1'
+version '1.0.2'
 
 shadowJar {
     configurations = [project.configurations.shadow]
@@ -93,6 +93,6 @@ repositories {
 
 dependencies {
     implementation 'fr.flowarg.aldraziel:aldraredis:1.0.0-SNAPSHOT'
-    shadow 'de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT'
+    shadow 'de.tr7zw:item-nbt-api:2.9.2'
     shadow project(':API')
 }

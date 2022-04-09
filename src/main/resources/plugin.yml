@@ -5,6 +5,7 @@ api-version: 1.18
 prefix: AldraCore
 depend:
     - AldraRedis
+    - NBTAPI
 
 permissions:
     aldracore.status:

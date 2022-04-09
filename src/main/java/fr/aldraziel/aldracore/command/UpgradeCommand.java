@@ -40,6 +40,11 @@ public class UpgradeCommand implements CommandExecutor {
             if (StuffUtils.isItemASword(item)){
                 final AldraMaterial material = AldraMaterial.valueOf(item);
                 int level = this.getLevel(item, AldraBonusItem.SWORD.getNbt());
+
+                if (material == null) {
+                    return false;
+                }
+
                 level = this.upgradeItem(player, item, AldraBonusItem.SWORD.getNbt(), AldraBonusItem.SWORD, level, material.getMaxWeaponLevel(),
                         IAldraBonus.getXpCost(AldraWeaponBonus.class, AldraBonusItem.SWORD, material, level));
 
@@ -52,6 +57,11 @@ public class UpgradeCommand implements CommandExecutor {
             if (StuffUtils.isItemAnArmor(item)) {
                 final AldraMaterial material = AldraMaterial.valueOf(item);
                 int level = this.getLevel(item, AldraBonusItem.ARMOR.getNbt());
+
+                if (material == null) {
+                    return false;
+                }
+
                 level = this.upgradeItem(player, item, AldraBonusItem.ARMOR.getNbt(), AldraBonusItem.ARMOR, level, material.getMaxArmorLevel(),
                         IAldraBonus.getXpCost(AldraArmorBonus.class, AldraBonusItem.ARMOR, material, level));
 

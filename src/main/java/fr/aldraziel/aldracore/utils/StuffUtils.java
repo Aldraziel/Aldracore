@@ -37,6 +37,11 @@ public class StuffUtils {
         if (StuffUtils.isItemAnArmor(item)) {
             final AldraMaterial material = AldraMaterial.valueOf(item);
             final int level = NbtUtils.readNbt(item, AldraBonusItem.ARMOR.getNbt(), int.class);
+
+            if (material == null) {
+                return 0;
+            }
+
             return IAldraBonus.getHighestByType(AldraArmorBonus.class, material, bonus, level) / 100;
         }
         return 0;
