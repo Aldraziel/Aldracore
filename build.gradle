@@ -8,6 +8,7 @@ allprojects {
     apply plugin: 'maven-publish'
 
     group 'fr.aldraziel'
+    version '1.0.2'
 
     java {
         toolchain {
@@ -68,8 +69,6 @@ allprojects {
         }
     }
 }
-
-version '1.0.2'
 
 shadowJar {
     configurations = [project.configurations.shadow]
