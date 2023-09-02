@@ -88,7 +88,7 @@ public class UpgradeCommand implements CommandExecutor {
 
     private int upgradeItem(Player player, ItemStack item, String nbtKey, AldraBonusItem bonus, int level, int maxLevel, int xpCost) {
         if (level == maxLevel) {
-            player.sendMessage(PREFIX + ChatColor.RED + "Your" + bonus.name().toLowerCase() + "is already maxed !");
+            player.sendMessage(PREFIX + ChatColor.RED + "Your " + bonus.name().toLowerCase() + " is already maxed !");
             return 0;
         }
 
@@ -97,7 +97,7 @@ public class UpgradeCommand implements CommandExecutor {
         if (xpLevel >= xpCost) {
             player.setLevel(xpLevel - xpCost);
             NbtUtils.writeNbt(item, nbtKey, level += 1);
-            player.sendMessage(PREFIX + "Your" + bonus.name().toLowerCase() + "has been " + ChatColor.AQUA + "upgraded" + ChatColor.RESET + " to level " + ChatColor.RED + level);
+            player.sendMessage(PREFIX + "Your " + bonus.name().toLowerCase() + " has been " + ChatColor.AQUA + "upgraded" + ChatColor.RESET + " to level " + ChatColor.RED + level);
             return level;
 
         } else {

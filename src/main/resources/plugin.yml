@@ -12,10 +12,6 @@ permissions:
         description: Access to the /status command
 
 commands:
-    status:
-        usage: /status <Player>
-        permission: aldracore.status
-        description: View player status
     upgrade:
         usage: /upgrade
         description: Upgrade item in your hand

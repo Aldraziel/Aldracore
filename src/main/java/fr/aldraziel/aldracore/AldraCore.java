@@ -5,11 +5,9 @@ import com.google.gson.GsonBuilder;
 import fr.aldraziel.aldracore.api.AldraCoreAPI;
 import fr.aldraziel.aldracore.api.AldraCoreImpl;
 import fr.aldraziel.aldracore.api.utils.AldraCommand;
-import fr.aldraziel.aldracore.command.StatusCommand;
 import fr.aldraziel.aldracore.command.UpgradeCommand;
 import fr.aldraziel.aldracore.listener.AttackListener;
 import fr.aldraziel.aldracore.listener.ConnectionListener;
-import fr.aldraziel.aldracore.listener.StatsListener;
 import fr.flowarg.aldraziel.aldraredis.AldraRedis;
 import fr.flowarg.aldraziel.aldraredis.RedisDataStorage;
 import org.bukkit.command.CommandExecutor;
@@ -37,12 +35,10 @@ public class AldraCore extends JavaPlugin {
 
         this.getLogger().info("Registering events...");
         this.registerEvent(this.api.getCacheManager());
-        this.registerEvent(new StatsListener(this));
         this.registerEvent(new AttackListener(this));
         this.registerEvent(new ConnectionListener(this));
 
         this.getLogger().info("Registering commands...");
-        this.setExecutor(AldraCommand.STATUS, new StatusCommand(this));
         this.setExecutor(AldraCommand.UPGRADE, new UpgradeCommand(this));
 
         this.api.getCacheManager().clearAndInit();
