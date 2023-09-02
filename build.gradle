@@ -56,8 +56,8 @@ allprojects {
         repositories {
             maven {
                 credentials {
-                    username System.getenv('USERNAME')
-                    password System.getenv('TOKEN')
+                    username System.getenv('GITHUB_USERNAME')
+                    password System.getenv('GITHUB_TOKEN')
                 }
                 name = "Aldracore_maven"
                 url = "https://maven.pkg.github.com/Aldraziel/Aldracore"
@@ -77,8 +77,8 @@ repositories {
     }
     maven {
         credentials {
-            username System.getenv('USERNAME')
-            password System.getenv('TOKEN')
+            username System.getenv('GITHUB_USERNAME')
+            password System.getenv('GITHUB_TOKEN')
         }
         name "AldraRedis_maven"
         url "https://maven.pkg.github.com/Aldraziel/AldraRedis"
