@@ -78,7 +78,12 @@ public class UpgradeCommand implements CommandExecutor {
     }
 
     private int getLevel(ItemStack item, String nbtKey) {
-        return NbtUtils.readNbt(item, nbtKey, int.class) != 0 ? NbtUtils.readNbt(item, nbtKey, int.class) : 1;
+        final Integer level = NbtUtils.readNbt(item, nbtKey, Integer.class);
+        if (level == null) {
+            NbtUtils.writeNbt(item, nbtKey, 0);
+        }
+
+        return NbtUtils.readNbt(item, nbtKey, Integer.class) != 0 ? NbtUtils.readNbt(item, nbtKey, Integer.class) : 1;
     }
 
     private int upgradeItem(Player player, ItemStack item, String nbtKey, AldraBonusItem bonus, int level, int maxLevel, int xpCost) {

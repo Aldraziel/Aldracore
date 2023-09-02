@@ -30,6 +30,8 @@ public class ConnectionListener implements Listener {
             this.cache.updatePlayer(this.pm.createPlayer(player.getUniqueId(), player.getDisplayName()));
         }
 
+        this.cache.updatePlayer(player.getUniqueId());
+
         PlayerUtils.setAttribute(player, Attribute.GENERIC_ATTACK_SPEED, 24D);
         PlayerUtils.setBonusAttribute(player, Attribute.GENERIC_MOVEMENT_SPEED, this.cache.getPlayer(player.getUniqueId()).getVelocity());
     }

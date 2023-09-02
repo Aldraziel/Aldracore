@@ -36,10 +36,15 @@ public class AttackListener implements Listener {
             //Damage item part
             final ItemStack damageItem = damager.getInventory().getItemInMainHand();
             final AldraMaterial damageMaterial = AldraMaterial.valueOf(damageItem);
-            final int damageLevel = NbtUtils.readNbt(damageItem, AldraBonusItem.SWORD.getNbt(), int.class);
+            Integer damageLevel = NbtUtils.readNbt(damageItem, AldraBonusItem.SWORD.getNbt(), Integer.class);
 
             if (damageMaterial == null) {
                 return;
+            }
+
+            if (damageLevel == null) {
+                NbtUtils.writeNbt(damageItem, AldraBonusItem.SWORD.getNbt(), 1);
+                damageLevel = NbtUtils.readNbt(damageItem, AldraBonusItem.SWORD.getNbt(), Integer.class);
             }
 
             //Final stats
@@ -66,7 +71,6 @@ public class AttackListener implements Listener {
 
             final double critical = this.getCritical(aldraDamager, damage, damageMaterial, damageLevel);
             final double damagedTypeBonus = this.getDamagedTypeBonus(e.getEntity(), damage, damageMaterial, damageLevel);
-
             e.setDamage((damage + (damage * critical) + (damage * damagedTypeBonus)) - (damage * defense));
         }
     }

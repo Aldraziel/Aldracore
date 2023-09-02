@@ -60,8 +60,8 @@ allprojects {
         repositories {
             maven {
                 credentials {
-                    username System.getenv('USERNAME')
-                    password System.getenv('TOKEN')
+                    username System.getenv('GITHUB_USERNAME')
+                    password System.getenv('GITHUB_TOKEN')
                 }
                 name = "Aldracore_maven"
                 url = "https://maven.pkg.github.com/Aldraziel/Aldracore"
@@ -81,8 +81,8 @@ repositories {
     }
     maven {
         credentials {
-            username System.getenv('USERNAME')
-            password System.getenv('TOKEN')
+            username System.getenv('GITHUB_USERNAME')
+            password System.getenv('GITHUB_TOKEN')
         }
         name "AldraRedis_maven"
         url "https://maven.pkg.github.com/Aldraziel/AldraRedis"
@@ -91,6 +91,6 @@ repositories {
 
 dependencies {
     implementation 'fr.flowarg.aldraziel:aldraredis:1.0.1-SNAPSHOT'
-    shadow 'de.tr7zw:item-nbt-api:2.9.2'
+    shadow 'de.tr7zw:item-nbt-api:2.11.3'
     shadow project(':API')
 }
