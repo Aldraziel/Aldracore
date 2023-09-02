@@ -39,17 +39,13 @@ allprojects {
     }
 
     tasks.register('sourcesJar', Jar) {
-        classifier 'sources'
+        archiveClassifier.set('sources')
         from sourceSets.main.allSource
     }
 
     tasks.register('javadocJar', Jar) {
-        classifier 'javadoc'
+        archiveClassifier.set('javadoc')
         from javadoc
-    }
-
-    artifacts {
-        archives sourcesJar, javadocJar
     }
 
     artifacts {

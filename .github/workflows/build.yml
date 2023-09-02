@@ -19,7 +19,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
-          GRADLE_VERSION: '7.4.1'
 
       - name: Build with Gradle
         run: gradle build
