@@ -1,7 +1,7 @@
 name: AldraCore
-version: 1.0.1
+version: 1.0.2
 main: fr.aldraziel.aldracore.AldraCore
-api-version: 1.18
+api-version: 1.19
 prefix: AldraCore
 depend:
     - AldraRedis
