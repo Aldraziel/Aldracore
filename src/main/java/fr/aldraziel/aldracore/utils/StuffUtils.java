@@ -41,7 +41,6 @@ public class StuffUtils {
             if (material == null) {
                 return 0;
             }
-
             return IAldraBonus.getHighestByType(AldraArmorBonus.class, material, bonus, level) / 100;
         }
         return 0;
