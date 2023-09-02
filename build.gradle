@@ -38,18 +38,18 @@ allprojects {
         api 'org.jetbrains:annotations:23.0.0'
     }
 
-    task sourcesJar(type: Jar, dependsOn: classes) {
+    tasks.register('sourcesJar', Jar) {
         classifier 'sources'
         from sourceSets.main.allSource
     }
 
-    task javadocJar(type: Jar) {
+    tasks.register('javadocJar', Jar) {
         classifier 'javadoc'
         from javadoc
     }
 
-    tasks.withType(Javadoc) {
-        options.encoding = 'UTF-8'
+    artifacts {
+        archives sourcesJar, javadocJar
     }
 
     artifacts {
