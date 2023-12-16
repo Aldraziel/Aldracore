@@ -2,14 +2,14 @@ package fr.aldraziel.aldracore;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import fr.aldraredis.AldraRedis;
+import fr.aldraredis.RedisDataStorage;
 import fr.aldraziel.aldracore.api.AldraCoreAPI;
 import fr.aldraziel.aldracore.api.AldraCoreImpl;
 import fr.aldraziel.aldracore.api.utils.AldraCommand;
 import fr.aldraziel.aldracore.command.UpgradeCommand;
 import fr.aldraziel.aldracore.listener.AttackListener;
 import fr.aldraziel.aldracore.listener.ConnectionListener;
-import fr.flowarg.aldraziel.aldraredis.AldraRedis;
-import fr.flowarg.aldraziel.aldraredis.RedisDataStorage;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;

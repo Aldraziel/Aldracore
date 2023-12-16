@@ -1,9 +1,9 @@
 package fr.aldraziel.aldracore.api.player;
 
+import fr.aldraredis.RedisDataStorage;
 import fr.aldraziel.aldracore.AldraCore;
 import fr.aldraziel.aldracore.api.event.IAldraEventManager;
 import fr.aldraziel.aldracore.api.event.player.PlayerStatsUpdateEvent;
-import fr.flowarg.aldraziel.aldraredis.RedisDataStorage;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;

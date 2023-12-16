@@ -86,7 +86,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'fr.flowarg.aldraziel:aldraredis:1.0.1-SNAPSHOT'
+    implementation 'fr.aldraredis:aldraredis:1.0.1-SNAPSHOT'
     shadow 'de.tr7zw:item-nbt-api:2.11.3'
     shadow project(':API')
 }
